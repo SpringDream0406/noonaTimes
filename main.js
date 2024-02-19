@@ -1,7 +1,16 @@
+// 카테고리 할당
 const menus = document.querySelectorAll(".menus button");
 menus.forEach((menu) =>
   menu.addEventListener("click", (e) => getNewsCategory(e))
 );
+// enter기능 추가
+const searchInput = document.getElementById("search-input");
+searchInput.addEventListener("keypress", (e) => {
+  if (e.key == "Enter") {
+    searchNews();
+    searchInput.value = "";
+  }
+});
 
 let newsList = [];
 let q = ``;
@@ -29,7 +38,7 @@ const getNewsCategory = (e) => {
 };
 
 const searchNews = () => {
-  q = document.getElementById("search-input").value;
+  q = searchInput.value;
   category = ``;
   getLatestNews();
 };
