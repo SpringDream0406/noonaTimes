@@ -9,8 +9,8 @@ const newsAPI_url = `https://newsapi.org/v2/top-headlines?country=kr&q=${q}&page
 const netlify_url = `https://noonanews.netlify.app/top-headlines?country=kr&q=${q}&page=${page}&pageSize=${pageSize}&category=${category}`;
 const newsAPI_url_KEY = `${newsAPI_url}${API_KEY}`;
 
-const getLatestNes = async () => {
-  const url = new URL(`${netlify_url}`);
+const getLatestNews = async () => {
+  const url = new URL(`${newsAPI_url_KEY}`);
   const response = await fetch(url);
   const data = await response.json();
   newsList = data.articles;
@@ -18,7 +18,7 @@ const getLatestNes = async () => {
   render();
 };
 
-getLatestNes();
+getLatestNews();
 
 const render = () => {
   let newsHTML = ``;
@@ -53,3 +53,18 @@ const render = () => {
 
   document.getElementById("news-board").innerHTML = newsHTML;
 };
+
+const openSearchBox = () => {
+  let inputArea = document.getElementById("input-area");
+  inputArea.style.display === "inline"
+    ? (inputArea.style.display = "none")
+    : (inputArea.style.display = "inline");
+};
+
+const openNav = () => {
+    document.getElementById("mySidenav").style.width = "250px";
+  };
+  
+  const closeNav = () => {
+    document.getElementById("mySidenav").style.width = "0";
+  };
