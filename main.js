@@ -1,21 +1,30 @@
+const menus = document.querySelectorAll(".menus button");
+menus.forEach((menu) =>
+  menu.addEventListener("click", (e) => getNewsCategory(e))
+);
+
 let newsList = [];
 let q = ``;
 let page = `1`;
 let pageSize = `20`;
 let category = ``;
 
-const API_KEY = `bd25ebe1582a4199b54a3b6cc16784bf`;
-const newsAPI_url = `https://newsapi.org/v2/top-headlines?country=kr&q=${q}&page=${page}&pageSize=${pageSize}&category=${category}&apiKey=`;
-const netlify_url = `https://noonanews.netlify.app/top-headlines?country=kr&q=${q}&page=${page}&pageSize=${pageSize}&category=${category}`;
-const newsAPI_url_KEY = `${newsAPI_url}${API_KEY}`;
-
 const getLatestNews = async () => {
+  let API_KEY = `bd25ebe1582a4199b54a3b6cc16784bf`;
+  let newsAPI_url = `https://newsapi.org/v2/top-headlines?country=kr&q=${q}&page=${page}&pageSize=${pageSize}&category=${category}&apiKey=`;
+  let netlify_url = `https://noonanews.netlify.app/top-headlines?country=kr&q=${q}&page=${page}&pageSize=${pageSize}&category=${category}`;
+  let newsAPI_url_KEY = `${newsAPI_url}${API_KEY}`;
+
   const url = new URL(`${netlify_url}`);
   const response = await fetch(url);
   const data = await response.json();
   newsList = data.articles;
-  console.log(newsList);
   render();
+};
+
+const getNewsCategory = (e) => {
+  category = e.target.textContent.toLowerCase();
+  getLatestNews();
 };
 
 getLatestNews();
@@ -62,9 +71,9 @@ const openSearchBox = () => {
 };
 
 const openNav = () => {
-    document.getElementById("mySidenav").style.width = "250px";
-  };
-  
-  const closeNav = () => {
-    document.getElementById("mySidenav").style.width = "0";
-  };
+  document.getElementById("mySidenav").style.width = "250px";
+};
+
+const closeNav = () => {
+  document.getElementById("mySidenav").style.width = "0";
+};
