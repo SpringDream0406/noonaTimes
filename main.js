@@ -12,8 +12,8 @@ let category = ``;
 const getLatestNews = async () => {
   let API_KEY = `bd25ebe1582a4199b54a3b6cc16784bf`;
   let newsAPI_url = `https://newsapi.org/v2/top-headlines?country=kr&q=${q}&page=${page}&pageSize=${pageSize}&category=${category}&apiKey=`;
-  let netlify_url = `https://noonanews.netlify.app/top-headlines?country=kr&q=${q}&page=${page}&pageSize=${pageSize}&category=${category}`;
   let newsAPI_url_KEY = `${newsAPI_url}${API_KEY}`;
+  let netlify_url = `https://noonanews.netlify.app/top-headlines?country=kr&q=${q}&page=${page}&pageSize=${pageSize}&category=${category}`;
 
   const url = new URL(`${netlify_url}`);
   const response = await fetch(url);
@@ -23,7 +23,14 @@ const getLatestNews = async () => {
 };
 
 const getNewsCategory = (e) => {
+  q = ``;
   category = e.target.textContent.toLowerCase();
+  getLatestNews();
+};
+
+const searchNews = () => {
+  q = document.getElementById("search-input").value;
+  category = ``;
   getLatestNews();
 };
 
