@@ -8,7 +8,6 @@ const searchInput = document.getElementById("search-input");
 searchInput.addEventListener("keypress", (e) => {
   if (e.key == "Enter") {
     searchNews();
-    searchInput.value = "";
   }
 });
 
@@ -41,6 +40,7 @@ const searchNews = () => {
   q = searchInput.value;
   category = ``;
   getLatestNews();
+  searchInput.value = "";
 };
 
 getLatestNews();
