@@ -20,6 +20,12 @@ searchInput.addEventListener("keypress", (e) => {
     searchNews();
   }
 });
+
+// 검색 후 다시 검색 위해 이전 글 삭제 기능 추가
+searchInput.addEventListener("focus", () => {
+  searchInput.value = "";
+});
+
 // 헤드라인 누르면 초기화(새로고침) 기능 추가
 const headLine = () => {
   location.reload();
@@ -39,7 +45,6 @@ const openSearchBox = () => {
 const openNav = () => {
   document.getElementById("mySidenav").style.width = "250px";
 };
-
 const closeNav = () => {
   document.getElementById("mySidenav").style.width = "0";
 };
@@ -51,15 +56,16 @@ const pageSize = `10`;
 let category = ``;
 let totalResult = 0;
 const pageGroupSize = 5;
+const API_KEY = `bd25ebe1582a4199b54a3b6cc16784bf`;
+const newsAPI_url = `https://newsapi.org/v2/top-headlines?country=kr&apiKey=`;
+const newsAPI_url_KEY = `${newsAPI_url}${API_KEY}`;
+const netlify_url = `https://noonanews.netlify.app/top-headlines?country=kr`;
+const url = new URL(`${netlify_url}`);
 
-const getLatestNews = async () => {
+const getNews = async () => {
   try {
-    let API_KEY = `bd25ebe1582a4199b54a3b6cc16784bf`;
-    let newsAPI_url = `https://newsapi.org/v2/top-headlines?country=kr&q=${q}&page=${page}&pageSize=${pageSize}&category=${category}&apiKey=`;
-    let newsAPI_url_KEY = `${newsAPI_url}${API_KEY}`;
-    let netlify_url = `https://noonanews.netlify.app/top-headlines?country=kr&q=${q}&page=${page}&pageSize=${pageSize}&category=${category}`;
-
-    const url = new URL(`${netlify_url}`);
+    url.searchParams.set("page", page);
+    url.searchParams.set("pageSize", pageSize);
     const response = await fetch(url);
     const data = await response.json();
     if (data.totalResults == 0) {
@@ -79,16 +85,15 @@ const getLatestNews = async () => {
 };
 
 const getNewsCategory = (e) => {
-  q = ``;
   category = e.target.textContent.toLowerCase();
-  getLatestNews();
+  url.searchParams.set("category", category);
+  getNews();
 };
 
 const searchNews = () => {
   q = searchInput.value;
-  category = ``;
-  getLatestNews();
-  searchInput.value = "";
+  url.searchParams.set("q", q);
+  getNews();
 };
 
 const render = () => {
@@ -132,7 +137,6 @@ const errorRender = (errorMessage) => {
   document.getElementById("news-board").innerHTML = errorHTML;
 };
 
-
 const paginationRender = () => {
   const totalPage = Math.ceil(totalResult / pageSize);
   const pageGroup = Math.ceil(page / pageGroupSize);
@@ -170,8 +174,7 @@ const paginationRender = () => {
 
 const moveToPage = (pageNum) => {
   page = pageNum;
-  getLatestNews();
+  getNews();
 };
 
-
-getLatestNews();
+getNews();
