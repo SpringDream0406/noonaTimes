@@ -26,7 +26,7 @@ const getLatestNews = async () => {
     let newsAPI_url_KEY = `${newsAPI_url}${API_KEY}`;
     let netlify_url = `https://noonanews.netlify.app/top-headlines?country=kr&q=${q}&page=${page}&pageSize=${pageSize}&category=${category}`;
 
-    const url = new URL(`${newsAPI_url_KEY}`);
+    const url = new URL(`${netlify_url}`);
     const response = await fetch(url);
     const data = await response.json();
     if (data.totalResults == 0) {
