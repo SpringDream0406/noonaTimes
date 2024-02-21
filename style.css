@@ -8,6 +8,10 @@
   width: 430px;
 }
 
+.head-line div:hover {
+  cursor: pointer;
+}
+
 .menus {
   margin-top: 1em;
   display: flex;
@@ -24,134 +28,139 @@
 }
 
 .menus button:hover {
-    background-color: black;
-    color: white;
+  background-color: black;
+  color: white;
 }
 
 .news-img {
-    max-width: 100%;
-    max-height: auto;
+  max-width: 100%;
+  max-height: auto;
 }
 
 .news {
-    border-bottom: 2px solid black;
+  border-bottom: 2px solid black;
 }
 
 .side-menu {
-    height: 100%;
-    width: 0;
-    position: fixed;
-    z-index: 1;
-    top: 0;
-    left: 0;
-    background-color: burlywood;
-    overflow-x: hidden;
-    transition: 0.5s;
-    padding-top: 60px;
-  }
-  .side-menu-list button {
-    margin: 5px;
-    border: none;
-    background: none;
-    width: 120px;
-  }
-  
-  .side-menu .closebtn {
-    position: absolute;
-    top: 0;
-    right: 25px;
-    font-size: 36px;
-    margin-left: 50px;
-    border: none;
-    background: none;
-  }
-  
-  .side-menu-list {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .side-menu-list button:hover {
-    background-color: beige;
-    border-radius: 3px;
-  }
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: burlywood;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+}
+.side-menu-list button {
+  margin: 5px;
+  border: none;
+  background: none;
+  width: 120px;
+}
 
-  .news{
-      padding: 5px;
-  }
+.side-menu .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+  border: none;
+  background: none;
+}
 
-  .side-menu {
-    height: 100%;
-    width: 0;
-    position: fixed;
-    z-index: 1;
-    top: 0;
-    left: 0;
-    background-color: burlywood;
-    overflow-x: hidden;
-    transition: 0.5s;
-    padding-top: 60px;
-  }
-  .side-menu-list button {
-    margin: 5px;
-    border: none;
-    background: none;
-    width: 120px;
-  }
-  
-  .side-menu .closebtn {
-    position: absolute;
-    top: 0;
-    right: 25px;
-    font-size: 36px;
-    margin-left: 50px;
-    border: none;
-    background: none;
-  }
-  
-  .side-menu-list {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .side-menu-list button:hover {
-    background-color: beige;
-    border-radius: 3px;
-  }
+.side-menu-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 
-  #input-area {
-      display: none;
-  }
-  
+.side-menu-list button:hover {
+  background-color: beige;
+  border-radius: 3px;
+}
+
+.news {
+  padding: 5px;
+}
+
+.side-menu {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: burlywood;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+}
+.side-menu-list button {
+  margin: 5px;
+  border: none;
+  background: none;
+  width: 120px;
+}
+
+.side-menu .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+  border: none;
+  background: none;
+}
+
+.side-menu-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.side-menu-list button:hover {
+  background-color: beige;
+  border-radius: 3px;
+}
+
+#search-input {
+  width: 150px;
+  height: 23px;
+}
+
+#input-area {
+  display: none;
+}
+
+.hide {
+  display: none;
+}
+
+@media screen and (max-width: 63rem) {
   .hide {
+    display: inline;
+  }
+  .menus {
     display: none;
   }
-
-  @media screen and (max-width: 63rem) {
-    .hide {
-      display: inline;
-    }
-    .menus {
-      display: none;
-    }
-  }
-  .pagenation-nav {
-    display: flex;
-    justify-content: center;
-  }
-  .pagination {
-    margin-top: 1em;
-  }
-  .page-item.active .page-link{
-      background-color: burlywood;
-      color: white;
-      border-color: burlywood;
-  }
-  .page-link{
-      color:burlywood
-  }
-  .col-lg-8{
-      margin-top:1em
-  }
+}
+.pagenation-nav {
+  display: flex;
+  justify-content: center;
+}
+.pagination {
+  margin-top: 1em;
+}
+.page-item.active .page-link {
+  background-color: burlywood;
+  color: white;
+  border-color: burlywood;
+}
+.page-link {
+  color: burlywood;
+}
+.col-lg-8 {
+  margin-top: 1em;
+}

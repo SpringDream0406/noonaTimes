@@ -10,6 +10,10 @@ searchInput.addEventListener("keypress", (e) => {
     searchNews();
   }
 });
+// 헤드라인 누르면 초기화(새로고침) 기능 추가
+const headLine = () => {
+    location.reload();
+}
 
 let newsList = [];
 let q = ``;
@@ -129,10 +133,10 @@ const paginationRender = () => {
   let paginationHTML = ``;
   if (page !== 1) {
     paginationHTML = `
-  <li class="page-item" onclick="moveToPage(${firstPage})"><a class="page-link" href="#"><<</a></li>
+  <li class="page-item" onclick="moveToPage(${firstPage})"><a class="page-link" href="#">&lt&lt</a></li>
   <li class="page-item" onclick="moveToPage(${
     page - 1
-  })"><a class="page-link" href="#"><</a></li>`;
+  })"><a class="page-link" href="#">&lt</a></li>`;
   }
 
   for (let i = firstPage; i <= lastPage; i++) {
@@ -146,8 +150,8 @@ const paginationRender = () => {
   if (page !== lastPage)
     paginationHTML += `<li class="page-item" onclick="moveToPage(${
       page + 1
-    })"><a class="page-link" href="#">></a></li>
-  <li class="page-item" onclick="moveToPage(${lastPage})"><a class="page-link" href="#">>></a></li>`;
+    })"><a class="page-link" href="#">&gt</a></li>
+  <li class="page-item" onclick="moveToPage(${lastPage})"><a class="page-link" href="#">&gt&gt</a></li>`;
 
   document.querySelector(".pagination").innerHTML = paginationHTML;
 };
