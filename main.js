@@ -13,9 +13,11 @@ searchInput.addEventListener("keypress", (e) => {
 
 let newsList = [];
 let q = ``;
-let page = `1`;
-let pageSize = `20`;
+let page = 1;
+const pageSize = `10`;
 let category = ``;
+let totalResult = 0;
+const pageGroupSize = 5;
 
 const getLatestNews = async () => {
   try {
@@ -24,16 +26,18 @@ const getLatestNews = async () => {
     let newsAPI_url_KEY = `${newsAPI_url}${API_KEY}`;
     let netlify_url = `https://noonanews.netlify.app/top-headlines?country=kr&q=${q}&page=${page}&pageSize=${pageSize}&category=${category}`;
 
-    const url = new URL(`${netlify_url}`);
+    const url = new URL(`${newsAPI_url_KEY}`);
     const response = await fetch(url);
     const data = await response.json();
-    if (data.totalResults == 0){
-        throw new Error("No result for this search");
+    if (data.totalResults == 0) {
+      throw new Error("No result for this search");
     }
     if (response.status == 200) {
       newsList = data.articles;
       render();
       console.log(data);
+      totalResult = data.totalResults;
+      paginationRender();
     } else {
       throw new Error(data.message);
     }
@@ -54,8 +58,6 @@ const searchNews = () => {
   getLatestNews();
   searchInput.value = "";
 };
-
-getLatestNews();
 
 const render = () => {
   let newsHTML = ``;
@@ -111,4 +113,47 @@ const openNav = () => {
 
 const closeNav = () => {
   document.getElementById("mySidenav").style.width = "0";
+};
+
+getLatestNews();
+
+const paginationRender = () => {
+  const totalPage = Math.ceil(totalResult / pageSize);
+  const pageGroup = Math.ceil(page / pageGroupSize);
+  const lastPage =
+    pageGroup * pageGroupSize > totalPage
+      ? totalPage
+      : pageGroup * pageGroupSize;
+  const firstPage =
+    lastPage - (pageGroupSize - 1) < 1 ? 1 : lastPage - (pageGroupSize - 1);
+  let paginationHTML = ``;
+  if (page !== 1) {
+    paginationHTML = `
+  <li class="page-item" onclick="moveToPage(${firstPage})"><a class="page-link" href="#"><<</a></li>
+  <li class="page-item" onclick="moveToPage(${
+    page - 1
+  })"><a class="page-link" href="#"><</a></li>`;
+  }
+
+  for (let i = firstPage; i <= lastPage; i++) {
+    paginationHTML += `
+<li class="page-item ${
+      i === page ? "active" : ""
+    }" onclick="moveToPage(${i})"><a class="page-link" href="#">${i}</a></li>
+`;
+  }
+
+  if (page !== lastPage)
+    paginationHTML += `<li class="page-item" onclick="moveToPage(${
+      page + 1
+    })"><a class="page-link" href="#">></a></li>
+  <li class="page-item" onclick="moveToPage(${lastPage})"><a class="page-link" href="#">>></a></li>`;
+
+  document.querySelector(".pagination").innerHTML = paginationHTML;
+};
+
+const moveToPage = (pageNum) => {
+  page = pageNum;
+  console.log(page);
+  getLatestNews();
 };
