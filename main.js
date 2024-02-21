@@ -1,13 +1,21 @@
 // 카테고리 할당
 const menus = document.querySelectorAll(".menus button");
 menus.forEach((menu) =>
-  menu.addEventListener("click", (e) => getNewsCategory(e))
+  menu.addEventListener("click", (e) => {
+    // 선택된 카테고리 외 class 제거
+    menus.forEach((otherMenu) => otherMenu.classList.remove("selected"));
+    // 선택된 카테고리 class 할당
+    e.target.classList.add("selected");
+    getNewsCategory(e);
+  })
 );
 
 // side-menu 카테고리 할당
 const sideMenuList = document.querySelectorAll(".side-menu-list button");
 sideMenuList.forEach((menu) =>
   menu.addEventListener("click", (e) => {
+    sideMenuList.forEach((otherMenu) => otherMenu.classList.remove("selected"));
+    e.target.classList.add("selected");
     getNewsCategory(e);
     closeNav();
   })
