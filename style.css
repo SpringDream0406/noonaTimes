@@ -92,7 +92,7 @@
   z-index: 1;
   top: 0;
   left: 0;
-  background-color: burlywood;
+  background-color: white;
   overflow-x: hidden;
   transition: 0.5s;
   padding-top: 60px;
@@ -121,8 +121,9 @@
 }
 
 .side-menu-list button:hover {
-  background-color: beige;
+  background-color: black;
   border-radius: 3px;
+  color: white;
 }
 
 #search-input {
@@ -146,21 +147,26 @@
     display: none;
   }
 }
+
 .pagenation-nav {
-  display: flex;
-  justify-content: center;
-}
-.pagination {
-  margin-top: 1em;
-}
-.page-item.active .page-link {
-  background-color: burlywood;
-  color: white;
-  border-color: burlywood;
-}
-.page-link {
-  color: burlywood;
-}
-.col-lg-8 {
-  margin-top: 1em;
-}
+    display: flex;
+    justify-content: center;
+  }
+  .pagination {
+    margin-top: 1em;
+  }
+  .page-item.active .page-link {
+    background-color: black;
+    color: lightyellow;
+    border-color: black;
+  }
+  .page-link {
+    color: black;
+  }
+  .page-link:hover {
+      background-color: lightgray;
+      color: black;
+  }
+  .col-lg-8 {
+    margin-top: 1em;
+  }

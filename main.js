@@ -3,6 +3,16 @@ const menus = document.querySelectorAll(".menus button");
 menus.forEach((menu) =>
   menu.addEventListener("click", (e) => getNewsCategory(e))
 );
+
+// side-menu 카테고리 할당
+const sideMenuList = document.querySelectorAll(".side-menu-list button");
+sideMenuList.forEach((menu) =>
+  menu.addEventListener("click", (e) => {
+    getNewsCategory(e);
+    closeNav();
+  })
+);
+
 // enter기능 추가
 const searchInput = document.getElementById("search-input");
 searchInput.addEventListener("keypress", (e) => {
@@ -12,8 +22,27 @@ searchInput.addEventListener("keypress", (e) => {
 });
 // 헤드라인 누르면 초기화(새로고침) 기능 추가
 const headLine = () => {
-    location.reload();
-}
+  location.reload();
+};
+
+const openSearchBox = () => {
+  let inputArea = document.getElementById("input-area");
+  if (inputArea.style.display === "inline") {
+    inputArea.style.display = "none";
+  } else {
+    inputArea.style.display = "inline";
+    // 서치박스 열리면 인풋창에 커서 가도록 하는 편의 기능 추가
+    searchInput.focus();
+  }
+};
+
+const openNav = () => {
+  document.getElementById("mySidenav").style.width = "250px";
+};
+
+const closeNav = () => {
+  document.getElementById("mySidenav").style.width = "0";
+};
 
 let newsList = [];
 let q = ``;
@@ -39,7 +68,6 @@ const getLatestNews = async () => {
     if (response.status == 200) {
       newsList = data.articles;
       render();
-      console.log(data);
       totalResult = data.totalResults;
       paginationRender();
     } else {
@@ -104,22 +132,6 @@ const errorRender = (errorMessage) => {
   document.getElementById("news-board").innerHTML = errorHTML;
 };
 
-const openSearchBox = () => {
-  let inputArea = document.getElementById("input-area");
-  inputArea.style.display === "inline"
-    ? (inputArea.style.display = "none")
-    : (inputArea.style.display = "inline");
-};
-
-const openNav = () => {
-  document.getElementById("mySidenav").style.width = "250px";
-};
-
-const closeNav = () => {
-  document.getElementById("mySidenav").style.width = "0";
-};
-
-getLatestNews();
 
 const paginationRender = () => {
   const totalPage = Math.ceil(totalResult / pageSize);
@@ -158,6 +170,8 @@ const paginationRender = () => {
 
 const moveToPage = (pageNum) => {
   page = pageNum;
-  console.log(page);
   getLatestNews();
 };
+
+
+getLatestNews();
