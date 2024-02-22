@@ -4,7 +4,7 @@
 <hr>
 
 
-## 🕹️ 데모 : [Times News website](https://noonanews.netlify.app/)
+## 🕹️ 데모 : [Times News Website](https://noonanews.netlify.app/)
 <hr>
   
 
@@ -15,7 +15,6 @@
 - 유저는 원하는 키워드로 뉴스를 검색 할 수 있습니다.
 - 페이지네이션을 이용해 더 많은 뉴스를 확인 가능합니다.
 - 웹시이트는 max-width: 63rem을 지원하는 반응형 웹페이지 입니다.
-- 
 <hr>
 
 ## 👨🏻‍💻 사용한 기술
