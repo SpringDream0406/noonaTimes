@@ -31,6 +31,12 @@
   background-color: lightgray;
 }
 
+.col-lg-4{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .news-img {
   max-width: 100%;
   max-height: auto;
