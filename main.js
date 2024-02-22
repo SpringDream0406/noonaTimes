@@ -58,7 +58,6 @@ const closeNav = () => {
 };
 
 let newsList = [];
-let q = ``;
 let page = 1;
 const pageSize = `10`;
 let category = ``;
@@ -77,12 +76,13 @@ const getNews = async () => {
     const response = await fetch(url);
     const data = await response.json();
     if (data.totalResults == 0) {
+      // 검색 결과가 없을 경우 페이지 네이션도 안뜨도록 설정
       throw new Error("No result for this search");
     }
     if (response.status == 200) {
       newsList = data.articles;
-      render();
       totalResult = data.totalResults;
+      render();
       paginationRender();
     } else {
       throw new Error(data.message);
@@ -99,7 +99,7 @@ const getNewsCategory = (e) => {
 };
 
 const searchNews = () => {
-  q = searchInput.value;
+  let q = searchInput.value;
   url.searchParams.set("q", q);
   getNews();
 };
@@ -143,10 +143,11 @@ const errorRender = (errorMessage) => {
     ${errorMessage}
   </div>`;
   document.getElementById("news-board").innerHTML = errorHTML;
+  document.querySelector(".pagination").innerHTML = ``;
 };
 
 const paginationRender = () => {
-  const totalPage = Math.ceil(totalResult / pageSize);
+  let totalPage = Math.ceil(totalResult / pageSize);
   const pageGroup = Math.ceil(page / pageGroupSize);
   const lastPage =
     pageGroup * pageGroupSize > totalPage
@@ -154,8 +155,12 @@ const paginationRender = () => {
       : pageGroup * pageGroupSize;
   const firstPage =
     lastPage - (pageGroupSize - 1) < 1 ? 1 : lastPage - (pageGroupSize - 1);
+  // 현재 페이지에서 다른페이지로 변활 될 때 변환되는 페이지의 최대 페이지가 현제 페이지보다 작은 경우 변환된 페이지의 마지막 페이지를 보여줌
+  if (page > lastPage) {
+    moveToPage(lastPage);
+  }
   let paginationHTML = ``;
-  if (page !== 1) {
+  if (page > 1) {
     paginationHTML = `
   <li class="page-item" onclick="moveToPage(${firstPage})"><a class="page-link" href="#">&lt&lt</a></li>
   <li class="page-item" onclick="moveToPage(${

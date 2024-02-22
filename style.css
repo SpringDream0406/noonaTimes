@@ -127,6 +127,7 @@
 #search-input {
   width: 150px;
   height: 23px;
+  border: 2px solid black;
 }
 
 #input-area {
