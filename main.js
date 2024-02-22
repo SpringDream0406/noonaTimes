@@ -95,12 +95,14 @@ const getNews = async () => {
 const getNewsCategory = (e) => {
   category = e.target.textContent.toLowerCase();
   url.searchParams.set("category", category);
+  page = 1;
   getNews();
 };
 
 const searchNews = () => {
   let q = searchInput.value;
   url.searchParams.set("q", q);
+  page = 1;
   getNews();
 };
 
@@ -155,10 +157,6 @@ const paginationRender = () => {
       : pageGroup * pageGroupSize;
   const firstPage =
     lastPage - (pageGroupSize - 1) < 1 ? 1 : lastPage - (pageGroupSize - 1);
-  // 현재 페이지에서 다른페이지로 변활 될 때 변환되는 페이지의 최대 페이지가 현제 페이지보다 작은 경우 변환된 페이지의 마지막 페이지를 보여줌
-  if (page > lastPage) {
-    moveToPage(lastPage);
-  }
   let paginationHTML = ``;
   if (page > 1) {
     paginationHTML = `
