@@ -113,7 +113,7 @@ const render = () => {
       (news) => `<div class="row news">
   <div class="col-lg-4">
   <img class="news-img" src="${
-    news.urlToImage ||
+    news.urlToImage ??
     "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRqEWgS0uxxEYJ0PsOb2OgwyWvC0Gjp8NUdPw&usqp=CAU"
   }" alt="뉴스 이미지" onerror="this.onerror=null; this.src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRqEWgS0uxxEYJ0PsOb2OgwyWvC0Gjp8NUdPw&usqp=CAU';">
   </div>
