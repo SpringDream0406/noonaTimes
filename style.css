@@ -1,3 +1,7 @@
+.container {
+  margin-top: 20px;  
+}
+
 .head-line {
   margin-top: 1em;
   display: flex;
@@ -150,6 +154,9 @@
   }
   .menus {
     display: none;
+  }
+  .head-line svg{
+    width: 340px;
   }
 }
 
